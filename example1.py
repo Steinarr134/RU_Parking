@@ -34,7 +34,8 @@ model.load_weights(filepath="mask_rcnn_coco.h5",
                    by_name=True)
 
 # load the input image, convert it from BGR to RGB channel
-image = cv2.imread("sample_image.jpg")
+filename = "test_images/2022-12-05 15_00_13.jpg"
+image = cv2.imread(filename)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Perform a forward pass of the network to obtain the results
@@ -45,6 +46,10 @@ print(time.time() - t0)
 
 # Get the results for the first image.
 r = r[0]
+
+import pickle
+with open(filename.replace(".jpg", ".pkl"), 'wb') as f:
+    pickle.dump(r, f)
 
 # Visualize the detected objects.
 mrcnn.visualize.display_instances(image=image,
