@@ -25,16 +25,16 @@ class SimpleConfig(mrcnn.config.Config):
 # Initialize the Mask R-CNN model for inference and then load the weights.
 # This step builds the Keras model architecture.
 model = mrcnn.model.MaskRCNN(mode="inference",
-                             config=SimpleConfig(),
-                             model_dir=os.getcwd())
+                            config=SimpleConfig(),
+                            model_dir=os.getcwd())
 
 
 # Load the weights into the model.
 model.load_weights(filepath="mask_rcnn_coco.h5",
-                   by_name=True)
+                    by_name=True)
 
 # load the input image, convert it from BGR to RGB channel
-filename = "test_images/2022-12-05 15_00_13.jpg"
+filename = "test_images/2022-12-09 10_18_27.jpg"
 image = cv2.imread(filename)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -53,8 +53,8 @@ with open(filename.replace(".jpg", ".pkl"), 'wb') as f:
 
 # Visualize the detected objects.
 mrcnn.visualize.display_instances(image=image,
-                                  boxes=r['rois'],
-                                  masks=r['masks'],
-                                  class_ids=r['class_ids'],
-                                  class_names=CLASS_NAMES,
-                                  scores=r['scores'])
+                                boxes=r['rois'],
+                                masks=r['masks'],
+                                class_ids=r['class_ids'],
+                                class_names=CLASS_NAMES,
+                                scores=r['scores'])
